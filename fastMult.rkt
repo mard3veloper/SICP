@@ -1,0 +1,16 @@
+#lang sicp
+(define (* a b)
+  (if (= b 0) 0
+      (+ a (* a (- b 1)))))
+(define (even? n)
+  (= (remainder n 2) 0))
+(define (*fast a b)
+  (cond ((= b 1) a)
+        ((even? b) (* (*fast a (/ b 2)) 2))
+      (else (+ (*fast a (- b 1)) a))))
+(define (*fast-iter a b step)
+  (cond ((= step 0)
+         a)
+        ((even? step)
+         (*fast-iter a (* b 2) (/ step 2)))
+        (else (*fast-iter (+ a b) b (- step 1)))))
